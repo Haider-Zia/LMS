@@ -25,17 +25,17 @@ function Classes() {
   // API call to initialize store
   const getClasses = async () => {
     try {
-      const formattedData = [];
+      const formattedClasses = [];
       const response = await fetch(`${process.env.REACT_APP_API_URL}/class`);
-      const jsonData = await response.json();
-      jsonData.map(
+      const unformattedClasses = await response.json();
+      unformattedClasses.map(
         ({
           class_id: id,
           teacher_email: teacherEmail,
           class_name: className,
-        }) => formattedData.push({ id, className, teacherEmail })
+        }) => formattedClasses.push({ id, className, teacherEmail })
       );
-      dispatch(loadClasses(formattedData));
+      dispatch(loadClasses(formattedClasses));
     } catch (error) {
       console.error(error.message);
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-// import { signup } from "./loginAndSignupSlice";
+import validator from "validator";
 
 function Signup() {
   // Local State
@@ -40,6 +40,9 @@ function Signup() {
     if (!email) {
       setSignupError(true);
       setSignupErrorMessage("Please enter email");
+    } else if (!validator.isEmail(email)) {
+      setSignupError(true);
+      setSignupErrorMessage("Please enter a valid email");
     } else if (!password) {
       setSignupError(true);
       setSignupErrorMessage("Please enter password");

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import validator from "validator";
 import {
   loginAsAdmin,
   loginAsTeacher,
@@ -62,6 +63,9 @@ function Login() {
     if (!emailField) {
       setLoginError(true);
       setLoginErrorMessage("Please enter email");
+    } else if (!validator.isEmail(emailField)) {
+      setLoginError(true);
+      setLoginErrorMessage("Please enter a valid email");
     } else if (!passwordField) {
       setLoginError(true);
       setLoginErrorMessage("Please enter password");

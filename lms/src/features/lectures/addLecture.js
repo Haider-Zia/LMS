@@ -35,18 +35,18 @@ function AddLecture({ currentClass }) {
       });
       const fetchedUrl = await response.json();
       // Call API to get teacherId of current class
-      let jsonData;
+      let jsonTeacherId;
       try {
         response = await fetch(
           `${process.env.REACT_APP_API_URL}/class/${currentClass}/get_teacher_id`
         );
-        jsonData = await response.json();
+        jsonTeacherId = await response.json();
       } catch (error) {
         console.error(error.message);
       }
       // Call API to add lecture to DB
       const body = {
-        teacherId: jsonData.teacher_id,
+        teacherId: jsonTeacherId.teacher_id,
         classId: currentClass,
         lectureName: lectureNameField,
         lectureUrl: fetchedUrl.filename,
@@ -59,12 +59,12 @@ function AddLecture({ currentClass }) {
 
       // Refresh list of lectures by fetching from API
       try {
-        const formattedData = [];
+        const formattedLectures = [];
         response = await fetch(
           `${process.env.REACT_APP_API_URL}/lecture/${currentClass}`
         );
-        jsonData = await response.json();
-        jsonData.map(
+        const unformattedLectures = await response.json();
+        unformattedLectures.map(
           ({
             lecture_id: id,
             class_id: classId,
@@ -72,7 +72,7 @@ function AddLecture({ currentClass }) {
             lecture_name: lectureName,
             lecture_url: lectureUrl,
           }) =>
-            formattedData.push({
+            formattedLectures.push({
               id,
               classId,
               teacherId,
@@ -80,7 +80,7 @@ function AddLecture({ currentClass }) {
               lectureUrl,
             })
         );
-        await dispatch(loadLectures(formattedData));
+        await dispatch(loadLectures(formattedLectures));
       } catch (error) {
         console.error(error.message);
       }

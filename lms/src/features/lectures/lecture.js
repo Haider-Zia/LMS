@@ -32,20 +32,20 @@ function Lecture({ id }) {
   };
 
   const download = async () => {
-    let jsonData;
+    let jsonLectureUrl;
     // Get the url of the file for the current lecture
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/lecture/get_lecture_url/${id}`
       );
-      jsonData = await response.json();
+      jsonLectureUrl = await response.json();
     } catch (error) {
       console.error(error.message);
     }
 
     // Download the file at the fetched url
     Axios({
-      url: `${process.env.REACT_APP_API_URL}/download/${jsonData.lecture_url}`,
+      url: `${process.env.REACT_APP_API_URL}/download/${jsonLectureUrl.lecture_url}`,
       method: "GET",
       responseType: "blob",
     }).then((res) => {

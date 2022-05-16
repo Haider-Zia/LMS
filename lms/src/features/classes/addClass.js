@@ -25,17 +25,17 @@ function AddClass() {
       setAddClassErrorMessage("Choose a teacher");
     } else {
       // Call API to add class to DB
-      let jsonData;
+      let jsonTeacherId;
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/person/${teacherEmailValueLabelPair.value}/get_person_id`
         );
-        jsonData = await response.json();
+        jsonTeacherId = await response.json();
       } catch (error) {
         console.error(error.message);
       }
       const body = {
-        teacherId: jsonData.person_id,
+        teacherId: jsonTeacherId.person_id,
         teacherEmail: teacherEmailValueLabelPair.value,
         className: classNameField,
       };
@@ -47,17 +47,17 @@ function AddClass() {
 
       // Refresh list of classes by fetching from API
       try {
-        const formattedData = [];
+        const formattedClasses = [];
         const response = await fetch(`${process.env.REACT_APP_API_URL}/class`);
-        jsonData = await response.json();
-        jsonData.map(
+        const unformattedClasses = await response.json();
+        unformattedClasses.map(
           ({
             class_id: id,
             teacher_email: teacherEmail,
             class_name: className,
-          }) => formattedData.push({ id, className, teacherEmail })
+          }) => formattedClasses.push({ id, className, teacherEmail })
         );
-        await dispatch(loadClasses(formattedData));
+        await dispatch(loadClasses(formattedClasses));
       } catch (error) {
         console.error(error.message);
       }

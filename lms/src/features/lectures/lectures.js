@@ -23,12 +23,12 @@ function Lectures() {
 
   const loadLecturesFunction = async () => {
     try {
-      const formattedData = [];
+      const formattedLectures = [];
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/lecture/${parseInt(params.id, 10)}`
       );
-      const jsonData = await response.json();
-      jsonData.map(
+      const unformattedLectures = await response.json();
+      unformattedLectures.map(
         ({
           lecture_id: id,
           class_id: classId,
@@ -36,7 +36,7 @@ function Lectures() {
           lecture_name: lectureName,
           lecture_url: lectureUrl,
         }) =>
-          formattedData.push({
+          formattedLectures.push({
             id,
             classId,
             teacherId,
@@ -44,7 +44,7 @@ function Lectures() {
             lectureUrl,
           })
       );
-      await dispatch(loadLectures(formattedData));
+      await dispatch(loadLectures(formattedLectures));
     } catch (error) {
       console.error(error.message);
     }
@@ -53,7 +53,7 @@ function Lectures() {
     // must be logged in to access this page
 
     if (currentEmail === "") {
-      navigate("/login");
+      navigate("/");
     }
 
     // if currently logged in as teacher, check if this class belongs to the teacher
