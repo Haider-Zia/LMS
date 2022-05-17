@@ -11,7 +11,7 @@ exports.addLecture = async (req, res) => {
     );
     res.json(newLecture);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -22,7 +22,7 @@ exports.getLecturesFromClass = async (req, res) => {
     const lectures = await lectureService.getLecturesFromClass(class_id);
     res.json(lectures);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -32,7 +32,7 @@ exports.getLectureUrl = async (req, res) => {
     const lectureUrl = await lectureService.getLectureUrl(id);
     res.json(lectureUrl);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -42,6 +42,6 @@ exports.deleteLecture = async (req, res) => {
     await lectureService.deleteLecture(id);
     res.json("Lecture was deleted");
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };

@@ -1,2 +1,3 @@
 backend/.env
 lms/.env
+backend/node_modules

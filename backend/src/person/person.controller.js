@@ -6,7 +6,7 @@ exports.addPerson = async (req, res) => {
     const newPerson = await personService.addPerson(email, pass, personType);
     res.json(newPerson);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -15,7 +15,7 @@ exports.getPersons = async (req, res) => {
     const allPersons = await personService.getPersons();
     res.json(allPersons.rows);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -25,7 +25,7 @@ exports.deletePerson = async (req, res) => {
     await personService.deletePerson(id);
     res.json("Person was deleted");
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -35,6 +35,6 @@ exports.getPersonIdFromEmail = async (req, res) => {
     const id = await personService.getPersonIdFromEmail(email);
     res.json(id);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
