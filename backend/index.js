@@ -53,4 +53,5 @@ app.use(classRouter);
 app.use(lectureRouter);
 app.listen(port, host, () => {
   console.log(`Server started on ${host}:${port}`);
+  console.log("hiiii");
 });
