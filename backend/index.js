@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
+const logger = require("./logger");
 
 require("dotenv").config();
 
@@ -52,6 +53,6 @@ app.use(personRouter);
 app.use(classRouter);
 app.use(lectureRouter);
 app.listen(port, host, () => {
-  console.log(`Server started on ${host}:${port}`);
-  console.log("hiiii");
+  // console.log(`Server started on ${host}:${port}`);
+  logger.info(`Server started on ${host}:${port}`);
 });
