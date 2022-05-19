@@ -30,12 +30,13 @@ function AddClass() {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/person/${teacherEmailValueLabelPair.value}/get_person_id`
         );
+        // console.log(await response.json());
         jsonTeacherId = await response.json();
       } catch (error) {
         console.error(error.message);
       }
       const body = {
-        teacherId: jsonTeacherId.person_id,
+        teacherId: jsonTeacherId,
         teacherEmail: teacherEmailValueLabelPair.value,
         className: classNameField,
       };

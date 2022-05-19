@@ -45,7 +45,7 @@ function Lecture({ id }) {
 
     // Download the file at the fetched url
     Axios({
-      url: `${process.env.REACT_APP_API_URL}/download/${jsonLectureUrl.lecture_url}`,
+      url: `${process.env.REACT_APP_API_URL}/download/${jsonLectureUrl}`,
       method: "GET",
       responseType: "blob",
     }).then((res) => {

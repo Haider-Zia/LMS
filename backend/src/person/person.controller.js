@@ -13,9 +13,9 @@ exports.addPerson = async (req, res) => {
 exports.getPersons = async (req, res) => {
   try {
     const allPersons = await personService.getPersons();
-    res.json(allPersons.rows);
+    return res.json(allPersons);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
 
