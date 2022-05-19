@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
+const logger = require("./logger");
+const { sequelize } = require("./models");
 
 require("dotenv").config();
 
@@ -47,10 +49,12 @@ app.get("/download/:file_url", (req, res) => {
   res.download(`uploads/${file_url}`);
 });
 
-//
 app.use(personRouter);
 app.use(classRouter);
 app.use(lectureRouter);
-app.listen(port, host, () => {
-  console.log(`Server started on ${host}:${port}`);
+app.listen(port, host, async () => {
+  // console.log(`Server started on ${host}:${port}`);
+  logger.info(`Server started on ${host}:${port}`);
+  await sequelize.authenticate();
+  logger.info("Database connected.");
 });

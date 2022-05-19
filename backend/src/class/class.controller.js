@@ -5,7 +5,7 @@ exports.getClasses = async (req, res) => {
     const allClasses = await classService.getClasses();
     res.json(allClasses);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -19,7 +19,7 @@ exports.addClass = async (req, res) => {
     );
     res.json(newClass);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -30,7 +30,7 @@ exports.getTeacherIdFromClass = async (req, res) => {
     const teacherId = await classService.getTeacherIdFromClass(c_id);
     res.json(teacherId);
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
 
@@ -40,6 +40,6 @@ exports.deleteClass = async (req, res) => {
     await classService.deleteClass(id);
     res.json("Class was deleted");
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json(error);
   }
 };
