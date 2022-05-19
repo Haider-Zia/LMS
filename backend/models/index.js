@@ -5,7 +5,8 @@ const Sequelize = require("sequelize");
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require("../config/config.json")[env];
+// eslint-disable-next-line import/extensions
+const config = require("../config/config.js")[env];
 
 const db = {};
 
