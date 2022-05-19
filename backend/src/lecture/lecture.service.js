@@ -65,6 +65,10 @@ exports.getLectureUrl = async (id) => {
 exports.deleteLecture = async (id) => {
   try {
     // await pool.query("DELETE FROM lecture WHERE lecture_id=($1)", [id]);
+    const foundLecture = await Lecture.findOne({
+      where: { lecture_id: id },
+    });
+    foundLecture.destroy();
   } catch (error) {
     throw Error("Error deleting lecture");
   }
