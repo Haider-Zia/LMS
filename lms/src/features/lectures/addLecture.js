@@ -46,7 +46,7 @@ function AddLecture({ currentClass }) {
       }
       // Call API to add lecture to DB
       const body = {
-        teacherId: jsonTeacherId.teacher_id,
+        teacherId: jsonTeacherId,
         classId: currentClass,
         lectureName: lectureNameField,
         lectureUrl: fetchedUrl.filename,
